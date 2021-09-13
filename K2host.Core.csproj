@@ -16,6 +16,8 @@ Eventually this library will be striped down.</Description>
     <Company>K2host.co.uk</Company>
     <Version>1.0.1</Version>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageIcon>Icon128.png</PackageIcon>
+    <PackageIconUrl />
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,6 +29,10 @@ Eventually this library will be striped down.</Description>
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="..\..\K2host.Pictures\Icon128.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
     <None Include="LICENSE">
       <Pack>True</Pack>
       <PackagePath></PackagePath>

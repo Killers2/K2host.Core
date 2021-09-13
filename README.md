@@ -7,6 +7,6 @@ This helps me move old projects acorss to .NET Core (.NET 5 / 6)
 
 Eventually this library will be striped down.
 
-Nuget Package: https://www.nuget.org/packages/K2host.Core/
+Nuget Package: https://www.nuget.org/packages/K2host.Core/1.0.1
 
 
