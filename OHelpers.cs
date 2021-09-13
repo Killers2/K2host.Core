@@ -104,7 +104,7 @@ namespace K2host.Core
             return true;
 
         }
-       
+
         public static bool Dispose<I>(this IEnumerable<I> e)
         {
 

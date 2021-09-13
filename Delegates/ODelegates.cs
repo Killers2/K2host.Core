@@ -1,8 +1,7 @@
 ﻿/*
 ' /====================================================\
-'| Developed Tony N. Hyde (k2host.co.uk).               |
-'| Founder of ConsoleX                                  |
-'| Application:                                         |
+'| Developed Tony N. Hyde (www.k2host.co.uk)            |
+'| Projected Started: 2018-10-30                        | 
 '| Use: General                                         |
 ' \====================================================/
 */
