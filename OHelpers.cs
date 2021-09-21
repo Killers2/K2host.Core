@@ -308,7 +308,7 @@ namespace K2host.Core
 
         public static bool IsNumeric(this string text)
         {
-            return double.TryParse(text, out _);
+            return text.All(c => Char.IsNumber(c));
         }
 
         public static void Each<T>(this IEnumerable<T> items, Predicate<T> predicate)
@@ -448,7 +448,7 @@ namespace K2host.Core
         {
             try
             {
-                return e + Microsoft.VisualBasic.Strings.Space(length - e.Length);
+                return e + Strings.Space(length - e.Length);
             }
             catch { return e; }
         }
@@ -474,6 +474,12 @@ namespace K2host.Core
                 ret += e + Microsoft.VisualBasic.Strings.Space(length - e.Length);
 
             return ret;
+        }
+       
+        public static string Ellipses(this string value, int maxChars)
+        {
+            const string ellipses = "...";
+            return value.Length <= maxChars ? value : value.Substring(0, maxChars - ellipses.Length) + ellipses;
         }
 
         public static string AlignRight(this string e)
