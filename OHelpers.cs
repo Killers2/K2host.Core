@@ -43,6 +43,28 @@ namespace K2host.Core
 
         #region Extentions
 
+        public static long GetSize(this DirectoryInfo source)
+        {
+            return source.GetFiles().Sum(fi => fi.Length) + source.GetDirectories().Sum(di => di.GetSize());
+        }
+
+        public static void CopyTo(this DirectoryInfo source, DirectoryInfo target, Action<FileInfo> afterCopy, bool recursive = false, bool overwrite = false, string filter = "*.*")
+        {
+
+            Directory.CreateDirectory(target.FullName);
+
+            source.GetFiles(filter).ForEach(fi => { 
+                fi.CopyTo(Path.Combine(target.FullName, fi.Name), overwrite);
+                afterCopy.Invoke(fi);
+            });
+
+            if(recursive)
+                source.GetDirectories().ForEach(di => { 
+                    di.CopyTo(target.CreateSubdirectory(di.Name), afterCopy, recursive, overwrite, filter);
+                });
+
+        }
+
         public static IEnumerable<IEnumerable<T>> Split<T>(this ICollection<T> e, int length)
         {
             var output  = new List<List<T>>();
@@ -371,6 +393,15 @@ namespace K2host.Core
                 index++;
             }
             return index;
+        }
+       
+        public static bool IsFilePath(this string e, out string[] path)
+        {
+
+            path = e.Split(new string[] { "/", "\\" }, StringSplitOptions.RemoveEmptyEntries);
+
+            return path.Last().Contains(".");
+
         }
 
         public static bool IsDictionary(this object o)
@@ -2283,7 +2314,7 @@ namespace K2host.Core
                      .Where(t => t.IsClass && t.IsPublic && t.Namespace == nameSpace)
                      .ToArray();
         }
-       
+
         public static Type[] GetTypeFromDomain(string typename)
         {
             return AppDomain.CurrentDomain
