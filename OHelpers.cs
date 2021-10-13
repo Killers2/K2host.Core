@@ -230,7 +230,7 @@ namespace K2host.Core
         {
             return Encoding.UTF8.GetString(data, 0, data.Length);
         }
-
+        
         public static I[] Sort<I>(this I[] Expression)
         {
             try
@@ -1811,6 +1811,41 @@ namespace K2host.Core
             return rsa.Decrypt(data, RSAEncryptionPadding.OaepSHA1);
         }
        
+        public static string EncryptRSASha1(X509Certificate2 cert, string data)
+        {
+            byte[] lp = Encoding.UTF8.GetBytes(data);
+            using RSA rsa = cert.GetRSAPublicKey();
+            return Convert.ToBase64String(rsa.Encrypt(lp, RSAEncryptionPadding.OaepSHA1));
+        }
+
+        public static string DecryptRSASha1(X509Certificate2 cert, string data)
+        {
+
+            data = data.Replace(" ", "+"); //Base64 and unicode
+            byte[] a;
+
+            //Sometimes the format is missing the equals operator
+            try { a = Convert.FromBase64String(data); }
+            catch
+            {
+                try { a = Convert.FromBase64String(data + "="); }
+                catch
+                {
+                    try
+                    {
+                        a = Convert.FromBase64String(data + "==");
+                    }
+                    catch (Exception)
+                    {
+                        throw;
+                    }
+                }
+            }
+
+            using RSA rsa = cert.GetRSAPrivateKey();
+            return Encoding.UTF8.GetString(rsa.Decrypt(a, RSAEncryptionPadding.OaepSHA1));
+        }
+
         public static int GetRsaMaxDataLength(int keySize, bool optimalAsymmetricEncryptionPadding)
         {
 
