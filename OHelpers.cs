@@ -89,6 +89,13 @@ namespace K2host.Core
         {
             e.GetType().GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Instance).SetValue(e, value);
         }
+        
+        public static I SetProtectedField<I>(this I e, string fieldName, object value)
+        {
+            e.GetType().GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Instance).SetValue(e, value);
+
+            return e;
+        }
 
         public static T GetProtectedField<T>(this object e, string fieldName)
         {
