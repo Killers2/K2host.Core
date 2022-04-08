@@ -14,7 +14,7 @@ Eventually this library will be striped down.</Description>
     <PackageReleaseNotes />
     <Authors>Tony N. Hyde</Authors>
     <Company>K2host.co.uk</Company>
-    <Version>1.0.4</Version>
+    <Version>1.0.5</Version>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageIcon>Icon128.png</PackageIcon>
     <PackageIconUrl />
