@@ -95,7 +95,7 @@ namespace K2host.Core.Classes
             {
 
                 MailMessage m = new() { From = new MailAddress(e.From) };
-
+                
                 if (e.To.Contains(",") || e.To.Contains(";"))
                     e.To.Split(new char[] { ',', ';' }).ForEach(addr => { m.To.Add(addr); });
                 else
